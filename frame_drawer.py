@@ -31,3 +31,4 @@ class FrameDrawer:
                 cv2.rectangle(frame, (bbox[0], bbox[1]), (bbox[0]+bbox[2], bbox[1] + bbox[3]), get_color(track_id), 3)
         cv2.imshow("Frame", frame)
         cv2.waitKey(1)
+        return frame

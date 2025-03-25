@@ -65,3 +65,4 @@ class MapDrawer:
         combined_frame = np.hstack((frame, list_frame))
         cv2.imshow("Map", combined_frame)
         cv2.waitKey(1)
+        return combined_frame
