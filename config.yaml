@@ -1,0 +1,21 @@
+
+object_detector_parameters:
+  model_file: models/yolov8n.pt
+  confidence: 0.5
+
+motion_detector_parameters:
+  min_motion_area: 200
+
+server_parameters:
+  host: 5000
+
+cameras:
+  0:
+    object_detector_area_rect: []
+    danger_zones: [[593, 582], [690, 701], [804, 572], [702, 477]]
+    rtsp: datasets/2.mp4
+
+  1:
+    object_detector_area_rect: [ ]
+    danger_zones: [ [ 593, 582 ], [ 690, 701 ], [ 804, 572 ], [ 702, 477 ] ]
+    rtsp: datasets/1.mp4
