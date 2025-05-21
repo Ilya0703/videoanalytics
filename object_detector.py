@@ -10,6 +10,9 @@ class ObjectDetector:
         self.initialized = True
         self.model = YOLO(model_path)
         self.confidence = confidence
+        if len(area_rect) == 0:
+            self.area_rect = None
+            return
         self.area_rect = area_rect
 
     @staticmethod
