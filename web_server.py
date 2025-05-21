@@ -4,7 +4,6 @@ from flask import Flask, Response
 import socket
 from threading import Thread, Event
 
-
 def getServerHost():
     testSock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     testHost = '10.0.0.0'
@@ -15,7 +14,6 @@ def getServerHost():
     return host
 
 def concat_images(imgs, direction='h', bg_color=(0, 0, 0)):
-    """Склеивает изображения с добавлением фона при разных размерах"""
     if direction == 'h':
         max_h = max(img.shape[0] for img in imgs)
         total_w = sum(img.shape[1] for img in imgs)
@@ -78,7 +76,7 @@ class WebServer:
             if not event.is_set():
                 continue
             event.clear()
-            frame, map = self.lastFramesDict[ip]
+            camera_id, frame, map = self.lastFramesDict[ip]
             frame = concat_images([frame, map])
             ret, buffer = cv2.imencode('.jpg', frame)
             frameBytes = buffer.tobytes()
@@ -93,7 +91,7 @@ class WebServer:
             return "RTSP Server"
 
         for ip in self.framesReceiversDict:
-            @self.app.route(f'/video_feed/{ip}', endpoint=ip)
+            @self.app.route(f'/video_feed/{ip}', endpoint=str(ip))
             def videoFeed(ip=ip):
                 return Response(self.GenerateFrames(ip),
                                 mimetype=
